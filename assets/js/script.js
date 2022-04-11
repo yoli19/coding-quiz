@@ -72,6 +72,17 @@ var startQuiz = function() {
     questionsIndex = 0;
     time = 120;
     timer.textContent = time;
+
+    var startTimer = setInterval(function() {
+        time--;
+        timer.textContent = time;
+        if(time <= 0) {
+            clearInterval(startTimer);
+            if (questionsIndex < questions.length - 1) {
+                quizOver();
+            }
+        }
+    },1000);
 };
 
 startQuizBtn.addEventListener("click", startQuiz);
