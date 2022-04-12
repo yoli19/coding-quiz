@@ -58,6 +58,11 @@ var viewScoresScreenEl = document.querySelector("#view-scores-screen");
 var startQuizBtn = document.querySelector("#start-quiz-btn");
 var question = document.querySelector("#question");
 var yourScore = document.querySelector("#your-score");
+var scoreFrom = document.querySelector("#score-form");
+var viewScoresBtn = document.querySelector("#view-scores-btn");
+var scoresList = document.querySelector("#scores-list");
+var goBackBtn = document.querySelector("#go-back-btn");
+var clearBtn = document.querySelector("#clear-btn");
 var a = document.querySelector("#a");
 var b = document.querySelector("#b");
 var c = document.querySelector("#c");
@@ -101,8 +106,6 @@ var quizQuestions = function() {
     b.textContent = questions[questionsIndex].answers[1];
     c.textContent = questions[questionsIndex].answers[2];
     d.textContent = questions[questionsIndex].answers[3];
-
-
 };
 
 //check answer. if correct add 1 to score, else subtract 10 from time
@@ -124,16 +127,44 @@ var checkAnswer = function(x) {
     };
 };
 
-
-
 //WHEN all questions are answered or the timer reaches 0 THEN the game is over
+//WHEN the game is over THEN I can save my initials and score
 var quizOver = function() {
     quizQuestionScreenEl.style.display = "none"
+    startQuizScreenEl.style.display = "none"
     saveScoreScreenEl.style.display = "block"
     yourScore.textContent = score
 };
 
-//WHEN the game is over THEN I can save my initials and score
+var saveScore = function() {
+    event.preventDefault();
+    startQuizScreenEl.style.display = "none"
+    quizQuestionScreenEl.style.display = "none"
+    saveScoreScreenEl.style.display = "none"
+    viewScoresScreenEl.style.display = "block"
+
+    var savedScore = document.createElement("li");
+    savedScore.className = "saved-score";
+    savedScore.innerHTML = "<div>" + score + "</div>";
+    scoresList.appendChild(savedScore);
+
+    highScores();
+};
+
+var highScores = function() {
+    startQuizScreenEl.style.display = "none"
+    quizQuestionScreenEl.style.display = "none"
+    saveScoreScreenEl.style.display = "none"
+    viewScoresScreenEl.style.display = "block"
+};
+
+var homeScreen = function() {
+    time = 0
+    startQuizScreenEl.style.display = "block"
+    quizQuestionScreenEl.style.display = "none"
+    saveScoreScreenEl.style.display = "none"
+    viewScoresScreenEl.style.display = "none"
+};
 
 startQuizBtn.addEventListener("click", startQuiz);
 
@@ -143,7 +174,11 @@ b.addEventListener("click", clickB);
 c.addEventListener("click", clickC);
 d.addEventListener("click", clickD);
 
-function clickA() { checkAnswer(0); };
-function clickB() { checkAnswer(1); };
-function clickC() { checkAnswer(2); };
-function clickD() { checkAnswer(3); };
+function clickA() { checkAnswer(0) };
+function clickB() { checkAnswer(1) };
+function clickC() { checkAnswer(2) };
+function clickD() { checkAnswer(3) };
+
+scoreFrom.addEventListener("submit", saveScore);
+viewScoresBtn.addEventListener("click", highScores);
+goBackBtn.addEventListener("click", homeScreen);

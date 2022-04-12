@@ -12,7 +12,7 @@
     <header id="header" class="container">
         <div class="row py-3">
             <div class="col">
-                <button>View High Scores</button>
+                <button id="view-scores-btn">View High Scores</button>
             </div>
             <div id="time-left" class="col text-end">
                 <p>Time Left: <span id="timer">0</span></p>
@@ -43,7 +43,7 @@
         <div id="save-score-screen" style="display: none;">
             <h1>Quiz Over!</h1>
             <p>Your score is: <span id="your-score">0</span></p>
-            <form>
+            <form id="score-form">
                 <div>
                     <p>Your Initials: </p>
                     <input type="text" name="initials" placeholder="" />
@@ -58,16 +58,15 @@
         <div id="view-scores-screen" style="display: none;">
             <h1>High Scores</h1>
             <div>
-                <ul>
+                <ul id="scores-list">
 
                 </ul>
             </div>
             <div>
-                <button>Go Back</button>
-                <button>Clear High Scores</button>
+                <button id="go-back-btn">Go Back</button>
+                <button id="clear-btn">Clear High Scores</button>
             </div>
         </div>
-
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
